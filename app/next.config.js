@@ -38,3 +38,27 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+const path = require('path');
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  distDir: process.env.NEXT_DIST_DIR || '.next',
+  output: 'export', // Add this line for static export
+  trailingSlash: true,
+  images: { 
+    unoptimized: true,
+    domains: ['images.unsplash.com'],
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  // Handle environment variables
+  env: {
+    DATABASE_URL: process.env.DATABASE_URL,
+  },
+};
+
+module.exports = nextConfig;
