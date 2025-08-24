@@ -1,0 +1,324 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 221.2 83.2% 53.3%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-inter;
+  }
+}
+
+/* NEVE-inspired custom styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+.font-inter {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* NEVE spacing system - 8px grid */
+.spacing-xs { @apply p-1; } /* 4px */
+.spacing-sm { @apply p-2; } /* 8px */
+.spacing-md { @apply p-3; } /* 12px */
+.spacing-lg { @apply p-4; } /* 16px */
+.spacing-xl { @apply p-6; } /* 24px */
+.spacing-2xl { @apply p-8; } /* 32px */
+
+/* Content width constraints */
+.content-container {
+  @apply max-w-[1170px] mx-auto px-4 md:px-6 lg:px-8;
+}
+
+/* Card shadows following NEVE style */
+.card-shadow {
+  @apply shadow-sm hover:shadow-md transition-shadow duration-300;
+}
+
+.card-shadow-lg {
+  @apply shadow-md hover:shadow-lg transition-shadow duration-300;
+}
+
+/* Typography hierarchy */
+.text-display {
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+}
+
+.text-heading-1 {
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+}
+
+.text-heading-2 {
+  @apply text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight;
+}
+
+.text-heading-3 {
+  @apply text-xl md:text-2xl lg:text-3xl font-semibold;
+}
+
+.text-heading-4 {
+  @apply text-lg md:text-xl lg:text-2xl font-medium;
+}
+
+.text-heading-5 {
+  @apply text-base md:text-lg lg:text-xl font-medium;
+}
+
+.text-heading-6 {
+  @apply text-sm md:text-base lg:text-lg font-medium;
+}
+
+.text-body {
+  @apply text-base leading-relaxed;
+}
+
+.text-body-sm {
+  @apply text-sm leading-relaxed;
+}
+
+/* Reading line lengths for optimal readability */
+.prose-readable {
+  @apply max-w-[65ch];
+}
+
+/* Smooth animations */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Count up animation for numbers */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.count-up {
+  animation: countUp 0.8s ease-out;
+}
+
+/* Blog post content styling */
+.prose {
+  @apply text-gray-700 dark:text-gray-300 leading-relaxed;
+}
+
+/* Markdown headings - ensuring they're visible and properly styled */
+.prose h1 {
+  @apply text-gray-900 dark:text-white font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight mb-6 mt-8 first:mt-0;
+}
+
+.prose h2 {
+  @apply text-gray-900 dark:text-white font-semibold text-2xl md:text-3xl lg:text-4xl tracking-tight mb-4 mt-8 first:mt-0;
+}
+
+.prose h3 {
+  @apply text-gray-900 dark:text-white font-semibold text-xl md:text-2xl lg:text-3xl mb-4 mt-6 first:mt-0;
+}
+
+.prose h4 {
+  @apply text-gray-900 dark:text-white font-medium text-lg md:text-xl lg:text-2xl mb-3 mt-6 first:mt-0;
+}
+
+.prose h5 {
+  @apply text-gray-900 dark:text-white font-medium text-base md:text-lg lg:text-xl mb-3 mt-4 first:mt-0;
+}
+
+.prose h6 {
+  @apply text-gray-900 dark:text-white font-medium text-sm md:text-base lg:text-lg mb-3 mt-4 first:mt-0;
+}
+
+.prose p {
+  @apply mb-4 text-base leading-relaxed;
+}
+
+.prose a {
+  @apply text-primary hover:text-primary/80 transition-colors underline;
+}
+
+.prose img {
+  @apply rounded-lg w-full h-auto object-cover my-6;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-primary/20 bg-gray-50 dark:bg-gray-800/50 pl-6 py-4 mb-6 italic text-gray-600 dark:text-gray-400;
+}
+
+.prose code {
+  @apply bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded-md text-sm font-mono;
+}
+
+.prose pre {
+  @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-6;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 text-sm font-mono;
+}
+
+.prose ul {
+  @apply mb-4 space-y-2 list-disc list-inside;
+}
+
+.prose ol {
+  @apply mb-4 space-y-2 list-decimal list-inside;
+}
+
+.prose li {
+  @apply leading-relaxed;
+}
+
+.prose strong {
+  @apply font-semibold text-gray-900 dark:text-white;
+}
+
+.prose em {
+  @apply italic;
+}
+
+.prose hr {
+  @apply border-gray-200 dark:border-gray-700 my-8;
+}
+
+.prose table {
+  @apply w-full border-collapse border border-gray-200 dark:border-gray-700 my-6;
+}
+
+.prose th,
+.prose td {
+  @apply border border-gray-200 dark:border-gray-700 px-4 py-2 text-left;
+}
+
+.prose th {
+  @apply bg-gray-50 dark:bg-gray-800 font-semibold;
+}
+
+/* Responsive masonry for blog grid */
+.masonry-grid {
+  columns: 1;
+  column-gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .masonry-grid {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    columns: 3;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+
+/* Navigation hover effects */
+.nav-link {
+  @apply relative transition-colors duration-200;
+}
+
+.nav-link::after {
+  @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+/* Button styles following NEVE patterns */
+.btn-primary {
+  @apply bg-primary text-primary-foreground px-6 py-3 rounded-md font-medium hover:bg-primary/90 transition-colors duration-200 inline-flex items-center gap-2;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-secondary-foreground px-6 py-3 rounded-md font-medium hover:bg-secondary/80 transition-colors duration-200 inline-flex items-center gap-2;
+}
+
+.btn-outline {
+  @apply border border-border text-foreground px-6 py-3 rounded-md font-medium hover:bg-accent hover:text-accent-foreground transition-colors duration-200 inline-flex items-center gap-2;
+}
+
+/* Search functionality */
+.search-highlight {
+  @apply bg-yellow-200 dark:bg-yellow-800 px-1 rounded;
+}
+
+/* Loading states */
+.skeleton {
+  @apply animate-pulse bg-gray-200 dark:bg-gray-700 rounded;
+}
+
+/* Responsive images */
+.responsive-image {
+  @apply w-full h-auto object-cover rounded-lg;
+}
+
+/* Social media icons */
+.social-icon {
+  @apply w-5 h-5 text-muted-foreground hover:text-foreground transition-colors duration-200;
+}

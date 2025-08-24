@@ -1,0 +1,13 @@
+
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "build:cloudflare": "next build && cp -r .next/static .next/server/static",
+    "pages:build": "yarn build:cloudflare",
+    "pages:dev": "wrangler pages dev .next --compatibility-date=2024-08-21 --compatibility-flags=nodejs_compat",
+    "pages:deploy": "wrangler pages deploy .next"
+  }
+}

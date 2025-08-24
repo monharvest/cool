@@ -1,0 +1,8 @@
+
+# Cloudflare Pages redirects
+/admin/login /admin 301
+/wp-admin /admin 301
+/wordpress /admin 301
+
+# Fallback for client-side routing
+/* /index.html 200

@@ -1,0 +1,147 @@
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/neve_inspired_blog/app/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Post {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  excerpt       String?
+  content       String
+  featuredImage String?
+  readingTime   Int      @default(5)
+  status        PostStatus @default(PUBLISHED)
+  featured      Boolean  @default(false)
+  publishedAt   DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  authorId      String
+  author        Author   @relation(fields: [authorId], references: [id])
+  categories    PostCategory[]
+  tags          PostTag[]
+  
+  @@map("posts")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  color       String   @default("#3B82F6")
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  posts       PostCategory[]
+  
+  @@map("categories")
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  createdAt DateTime @default(now())
+  
+  // Relations
+  posts     PostTag[]
+  
+  @@map("tags")
+}
+
+model Author {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  avatar    String?
+  bio       String?
+  website   String?
+  twitter   String?
+  linkedin  String?
+  createdAt DateTime @default(now())
+  
+  // Relations
+  posts     Post[]
+  
+  @@map("authors")
+}
+
+model PostCategory {
+  post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId     String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId String
+  
+  @@id([postId, categoryId])
+  @@map("post_categories")
+}
+
+model PostTag {
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  tagId  String
+  
+  @@id([postId, tagId])
+  @@map("post_tags")
+}
+
+model SiteSetting {
+  key       String @id
+  value     String
+  type      String @default("text")
+  updatedAt DateTime @updatedAt
+  
+  @@map("site_settings")
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  status    ContactStatus @default(UNREAD)
+  createdAt DateTime @default(now())
+  
+  @@map("contacts")
+}
+
+model Newsletter {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  status    NewsletterStatus @default(ACTIVE)
+  createdAt DateTime @default(now())
+  
+  @@map("newsletters")
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ContactStatus {
+  UNREAD
+  READ
+  REPLIED
+}
+
+enum NewsletterStatus {
+  ACTIVE
+  UNSUBSCRIBED
+}
